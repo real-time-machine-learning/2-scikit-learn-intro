@@ -1,4 +1,4 @@
-# 利用Scikit Learn对秒级股票数据进行建模预测
+# 利用Scikit Learn机器学习模块进行建模和预测
 
 这里我们学习Scikit Learn的安装和基本操作，并且尝试通过Scikit Learn对秒
 级股票价格数据进行预测。
@@ -43,10 +43,13 @@ python3
 >>> import sklearn 
 ```
 
-## Pandas基本操作
+## Scikit Learn基本操作
 
-下面我们将利用`example.py`中的操作介绍Scikit Learn的基本模块。
+本章具有多个实例模块：
 
+ * `digits-knn.py`: 使用K-最近邻估计对扫描数字数据进行分类
+ * `digits-linear-regression.py`: 使用逻辑回归对扫描数字数据进行分类
+ * `iris-pipeline.py`: 使用pipeline对Iris鲜花数据进行分类 
 
 --- 
 《实时机器学习实战》 彭河森、汪涵
