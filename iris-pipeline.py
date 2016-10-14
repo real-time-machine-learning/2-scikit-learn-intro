@@ -7,6 +7,7 @@ from sklearn.svm import SVC
 from sklearn.datasets import load_iris
 from sklearn.decomposition import PCA
 from sklearn.feature_selection import SelectKBest
+from sklearn.externals import joblib
 
 ## 准备Iris鲜花数据
 iris = load_iris()
@@ -29,7 +30,8 @@ combined_features = FeatureUnion([("pca", pca),
 ## 这里是最后起到分类作用的SVM 分类器模块
 svm = SVC(kernel="linear")
 
-## 最后把所有模块整合起来，形成一个pipeline对象
+""" 最后把所有模块整合起来，形成一个pipeline对象
+""" 
 pipeline = Pipeline([("features", combined_features), ("svm", svm)])
 
 ## 对pipeline对象进行训练
@@ -38,3 +40,7 @@ pipeline.fit(X,y)
 ## 利用训练好的pipeline对象进行预测
 pipeline.predict(X) 
 
+""" pipeline对象可以被储存起来，用于后续工作 
+""" 
+joblib.dump(pipeline, 
+            'iris-pipeline.pkl') 
