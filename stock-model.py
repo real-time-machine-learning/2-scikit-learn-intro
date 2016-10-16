@@ -9,6 +9,12 @@
 
 import pandas as pd 
 
+import numpy as np
+
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LinearRegression
+
 """数据导入
 
 这里我们导入经过了预处理的苹果公司股票报价，该数据仅包含正常交易时间的
@@ -38,6 +44,9 @@ Scikit learn 的preprocessing 模块目前只能将X, Y形态的数据整理成�
 这里我们将会采用两种方法进行比较。
 """ 
 
+## we don't wanna output y here. just get the embedder. and put it
+## into a featurizer. 
+
 def embed_time_series(x, k):
     """this function would transform an N dimensional time series into a
     tuple containing: 
@@ -52,16 +61,23 @@ def embed_time_series(x, k):
     if k >= n: 
         raise "Can not deal with k greater than the length of x" 
     
-    output_y = list(x[k:])
     output_x = list(map(lambda i: list(x[i:(i+k)]), 
                         range(0, n-k)))
-    return (output_x, output_y)
+    return np.array(output_x)
 
-class TimeSeriesEmbedder(): 
+class TimeSeriesEmbedder(BaseEstimator, TransformerMixin):
     def __init__(self, k):
         self.k = k 
-    def fit(self):
-        pass
-    def transform(self, X, y):
+    def fit(self, X, y= None):
+        return self
+    def transform(self, X, y = None):
         return embed_time_series(X, self.k)
-        
+
+u = TimeSeriesEmbedder(k = 12)
+v = LinearRegression()
+
+pipeline = Pipeline([("tran", u ),
+                     ("lin", v)])
+
+pipeline.fit(range(1000), range(988))
+pipeline.predict(range(100))
