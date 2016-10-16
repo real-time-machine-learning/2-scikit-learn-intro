@@ -12,8 +12,10 @@ import pandas as pd
 import numpy as np
 
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.preprocessing import Imputer
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LinearRegression
+
 
 """数据导入
 
@@ -47,6 +49,7 @@ Scikit learn 的preprocessing 模块目前只能将X, Y形态的数据整理成�
 ## we don't wanna output y here. just get the embedder. and put it
 ## into a featurizer. 
 
+
 def embed_time_series(x, k):
     """this function would transform an N dimensional time series into a
     tuple containing: 
@@ -73,11 +76,34 @@ class TimeSeriesEmbedder(BaseEstimator, TransformerMixin):
     def transform(self, X, y = None):
         return embed_time_series(X, self.k)
 
-u = TimeSeriesEmbedder(k = 12)
-v = LinearRegression()
+class ColumnExtractor(BaseEstimator, TransformerMixin):
+    def __init__(self, column_name):
+        self.column_name = column_name
+    def fit(self, X, y=None):
+        return self
+    def transform(self, X, y=None):
+        return X[self.column_name]
 
-pipeline = Pipeline([("tran", u ),
-                     ("lin", v)])
+class TimeSeriesDiff(BaseEstimator, TransformerMixin):
+    def __init__(self, k=1):
+        self.k = k 
+    def fit(self, X, y=None):
+        return self
+    def transform(self, X, y=None):
+        if type(X) is pd.core.frame.DataFrame or type(X) is pd.core.series.Series:
+            return X.diff(self.k) / X.shift(self.k)
+        else:
+            raise "Have to be a pandas data frame or Series object!"
 
-pipeline.fit(range(1000), range(988))
-pipeline.predict(range(100))
+pipeline = Pipeline([("ColumnEx", ColumnExtractor("Close")),
+                     ("Diff", TimeSeriesDiff()),
+                     ("Embed", TimeSeriesEmbedder(10)),
+                     ("ImputerNA", Imputer()),
+                     ("LinearReg", LinearRegression())])
+
+
+                    
+pipeline.fit(data, data["Close"][:20518])
+pipeline.predict(data)
+
+pipeline.predict(data)
