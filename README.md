@@ -50,8 +50,7 @@ python3
  * `digits-knn.py`: 使用K-最近邻估计对扫描数字数据进行分类
  * `digits-linear-regression.py`: 使用逻辑回归对扫描数字数据进行分类
  * `iris-pipeline.py`: 使用pipeline对Iris鲜花数据进行分类 
+ * `stock-model.py`: 使用Scikit Learn对股价变化进行预测建模
 
 --- 
 《实时机器学习实战》 彭河森、汪涵
-
-
