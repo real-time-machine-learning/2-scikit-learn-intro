@@ -1,0 +1,20 @@
+
+"""《实时机器学习实战》　彭河森、汪涵
+
+机器学习工具Scikit Learn介绍
+
+这里我们将利用Scikit Learn对苹果公司的秒级股票报价进行建模，并以此为例
+熟悉Scikit Learn的各个模块。
+""" 
+
+import pandas as pd 
+
+"""数据导入
+
+这里我们导入经过了预处理的苹果公司股票报价，该数据仅包含正常交易时间的
+数据。
+"""
+
+data = pd.read_csv("aapl-trading-hour.csv",
+                   index_col = 0)
+
