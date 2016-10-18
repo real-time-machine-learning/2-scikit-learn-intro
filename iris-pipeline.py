@@ -34,7 +34,7 @@ svm = SVC(kernel="linear")
 """ 
 pipeline = Pipeline([("features", combined_features), ("svm", svm)])
 
-## 对pipeline对象进行训练
+## 对pipeline对象进行训练。
 pipeline.fit(X,y)
 
 ## 利用训练好的pipeline对象进行预测
