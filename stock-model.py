@@ -63,10 +63,10 @@ print(r2_score(y_test, y_pred))
 print(median_absolute_error(y_test, y_pred))
 
 cc = np.sign(y_pred)*y_test
-cc.cumsum().plot()
+cumulative_return = (cc+1).cumprod()
+cumulative_return.plot()
 ## plt.savefig("plots/performance-simple-linreg.png")
 plt.show()
-
 
 """更复杂的Pipeline
 
@@ -98,7 +98,8 @@ print(r2_score(y_test, y_pred_2))
 print(median_absolute_error(y_test, y_pred_2))
 
 cc_2 = np.sign(y_pred_2)*y_test
-cc_2.cumsum().plot()
+cumulative_return_2 = (cc_2+1).cumprod()
+cumulative_return_2.plot()
 ## plt.savefig("plots/performance-more-variables.png")
 plt.show()
 
