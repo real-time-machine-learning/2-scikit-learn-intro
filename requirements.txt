@@ -4,3 +4,4 @@ matplotlib
 pandas 
 cairocffi
 joblib 
+sklearn

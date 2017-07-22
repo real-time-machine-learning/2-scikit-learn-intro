@@ -21,6 +21,7 @@ import matplotlib.pyplot as plt
 import matplotlib 
 
 matplotlib.style.use('ggplot')
+plt.xticks(rotation=70)
 
 """数据导入
 
@@ -64,9 +65,9 @@ print(median_absolute_error(y_test, y_pred))
 
 cc = np.sign(y_pred)*y_test
 cumulative_return = (cc+1).cumprod()
-cumulative_return.plot()
-## plt.savefig("plots/performance-simple-linreg.png")
-plt.show()
+cumulative_return.plot(rot=10)
+plt.savefig("plots/performance-simple-linreg.png")
+# plt.show()
 
 """更复杂的Pipeline
 
@@ -99,9 +100,9 @@ print(median_absolute_error(y_test, y_pred_2))
 
 cc_2 = np.sign(y_pred_2)*y_test
 cumulative_return_2 = (cc_2+1).cumprod()
-cumulative_return_2.plot()
-## plt.savefig("plots/performance-more-variables.png")
-plt.show()
+cumulative_return_2.plot(style="k--", rot=10)
+plt.savefig("plots/performance-more-variables.png")
+# plt.show()
 
 """ 预测运行时间有多长?
 """ 
