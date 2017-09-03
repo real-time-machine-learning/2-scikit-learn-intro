@@ -20,7 +20,7 @@ git clone https://github.com/real-time-machine-learning/2-scikit-learn-intro
 
 在Ubuntu 下面安装Python 3，只需执行下面操作：
 ```shell
-sudo apt-get install python3 python3-pip python3-dev build-essential 
+sudo apt-get install python3 python3-pip python3-dev build-essential libffi6 libffi-dev
 ```
 在Mac下利用Homebrew 安装Python 3，只需执行下面操作：
 ```shell
