@@ -52,5 +52,11 @@ python3
  * `iris-pipeline.py`: 使用pipeline对Iris鲜花数据进行分类 
  * `stock-model.py`: 使用Scikit Learn对股价变化进行预测建模
 
+## 鸣谢
+
+感谢下面各位为本代码提出宝贵意见和指正：
+
+ - [张野飞](https://github.com/351zyf) 
+
 --- 
 《实时机器学习实战》 彭河森、汪涵
